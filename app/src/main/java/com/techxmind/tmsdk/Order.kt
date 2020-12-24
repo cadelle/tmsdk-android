@@ -16,7 +16,7 @@ class Order : Activity() {
 
         val orderId = intent.getIntExtra("order_id", 0)
 
-        Agent.setPageInfo(this, "order")
+        Agent.setPageInfo(this, "order", orderId.toString())
 
         findViewById<TextView>(R.id.orderid).text = "order id: $orderId"
 

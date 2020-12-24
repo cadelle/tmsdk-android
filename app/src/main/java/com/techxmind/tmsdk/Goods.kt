@@ -14,7 +14,7 @@ class Goods : Activity() {
 
         val goodsId = intent.getIntExtra("goods_id", 0)
 
-        Agent.setPageInfo(this, "goods_detail")
+        Agent.setPageInfo(this, "goods_detail", goodsId.toString())
 
         val t = findViewById<TextView>(R.id.goodsid)
         t.text = "goods id : $goodsId"
