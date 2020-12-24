@@ -1,0 +1,3 @@
+include ':el'
+include ':app'
+rootProject.name = "TMSDK"
