@@ -127,6 +127,7 @@ object Agent {
         eventCommonBuilder.screenHeight = sp.height
         eventCommonBuilder.screenResolution = sp.resolution
         eventCommonBuilder.screenSize = sp.size
+        eventCommon = eventCommonBuilder.build()
     }
 
     fun setPageInfo(
@@ -175,8 +176,8 @@ object Agent {
         val evt = Event(type = type)
 
         if (extendInfo != null) {
-            if (extendInfo.containsKey("module_id")) {
-                evt.moduleId = extendInfo.remove("module_id") ?: ""
+            if (extendInfo.containsKey("moduleId")) {
+                evt.moduleId = extendInfo.remove("moduleId") ?: ""
             }
             if (extendInfo.containsKey("duration")) {
                 val dur = extendInfo.remove("duration") ?: "0"
@@ -259,6 +260,7 @@ object Agent {
         }
 
         if (needSubmit) {
+            logger.log("submit cause event count reached the limitation")
             submit()
         }
 
@@ -303,6 +305,7 @@ object Agent {
         thread(start = true) {
             while(true) {
                 Thread.sleep((Configure.submitIntervalSeconds * 1000).coerceAtLeast(3000))
+                logger.log("submit cause time schedule")
                 submit()
             }
         }
@@ -325,7 +328,7 @@ object Agent {
         val url = URL(Configure.logserver)
 
         if (DEBUG) {
-            logger.log("send mul events:" + JsonFormat.printer().print(events))
+            logger.log("send mul events:" + JsonFormat.printer().printingEnumsAsInts().print(events))
         }
 
         try {
