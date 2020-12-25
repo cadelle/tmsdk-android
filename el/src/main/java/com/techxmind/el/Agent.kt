@@ -146,6 +146,14 @@ object Agent {
         )
     }
 
+    fun getUdid(): String {
+        return eventCommon.udid
+    }
+
+    fun getTkid(): String {
+        return eventCommon.tkid
+    }
+
     fun setReferer(intent: Intent, activity: Activity, refModuleId: String = ""): Agent {
         intent.putExtra(REFERER, Referer.create(lastPvEvent(activity.hashCode()), refModuleId))
         return this
